@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#0d47a1">
   <meta name="description" content="Volledig offline PGP-versleuteling met wachtwoord. Client-side only.">
+  <!-- Strikte Content Security Policy: alleen lokale bestanden -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'none';
     script-src 'self' 'unsafe-inline';
@@ -322,12 +323,16 @@
         decryptTab: 'Ontsleutelen',
         password: 'Wachtwoord',
         passwordHint: 'Deel dit wachtwoord persoonlijk (nooit via hetzelfde kanaal als de tekst)',
+        passwordPlaceholder: 'Sterk wachtwoord of lange wachtwoordzin',
         plaintext: 'Bericht om te versleutelen',
+        plaintextPlaceholder: 'Typ hier je geheime bericht...',
         encryptBtn: 'Versleutelen',
         copyBtn: 'Kopieer',
         encryptedLabel: 'Versleutelde PGP-tekst',
         password2: 'Wachtwoord',
+        password2Placeholder: 'Hetzelfde wachtwoord',
         ciphertext: 'Plak hier de versleutelde PGP-tekst',
+        ciphertextPlaceholder: '-----BEGIN PGP MESSAGE-----\n...\n-----END PGP MESSAGE-----',
         decryptBtn: 'Ontsleutelen',
         decryptedLabel: 'Ontsleuteld bericht',
         footer: 'Werkt op iOS, Samsung, Android, Windows, Mac & Linux.<br>Powered by OpenPGP.js v6.3.1<br>Open source • Geen tracking • Geen server',
@@ -357,12 +362,16 @@
         decryptTab: 'Decrypt',
         password: 'Password',
         passwordHint: 'Share this password in person (never via the same channel as the text)',
+        passwordPlaceholder: 'Strong password or long passphrase',
         plaintext: 'Message to encrypt',
+        plaintextPlaceholder: 'Type your secret message here...',
         encryptBtn: 'Encrypt',
         copyBtn: 'Copy',
         encryptedLabel: 'Encrypted PGP text',
         password2: 'Password',
+        password2Placeholder: 'The same password',
         ciphertext: 'Paste the encrypted PGP text here',
+        ciphertextPlaceholder: '-----BEGIN PGP MESSAGE-----\n...\n-----END PGP MESSAGE-----',
         decryptBtn: 'Decrypt',
         decryptedLabel: 'Decrypted message',
         footer: 'Works on iOS, Samsung, Android, Windows, Mac & Linux.<br>Powered by OpenPGP.js v6.3.1<br>Open source • No tracking • No server',
@@ -390,12 +399,16 @@
       document.getElementById('tab-decrypt').textContent = t.decryptTab;
       document.getElementById('label-password').textContent = t.password;
       document.getElementById('password-hint').textContent = t.passwordHint;
+      document.getElementById('password').placeholder = t.passwordPlaceholder;
       document.getElementById('label-plaintext').textContent = t.plaintext;
+      document.getElementById('plaintext').placeholder = t.plaintextPlaceholder;
       document.getElementById('btn-encrypt').textContent = t.encryptBtn;
       document.getElementById('btn-copy').textContent = t.copyBtn;
       document.getElementById('label-encrypted').textContent = t.encryptedLabel;
       document.getElementById('label-password2').textContent = t.password2;
+      document.getElementById('password2').placeholder = t.password2Placeholder;
       document.getElementById('label-ciphertext').textContent = t.ciphertext;
+      document.getElementById('ciphertext').placeholder = t.ciphertextPlaceholder;
       document.getElementById('btn-decrypt').textContent = t.decryptBtn;
       document.getElementById('label-decrypted').textContent = t.decryptedLabel;
       document.getElementById('footer').innerHTML = t.footer;
