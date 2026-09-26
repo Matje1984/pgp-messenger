@@ -27,17 +27,24 @@ De versleuteling is echte OpenPGP met:
    - Cijfers
    - Leestekens (bijv. `!@#$%^&*`)
 
-2. **Deel het wachtwoord NOOIT via hetzelfde kanaal als de versleutelde tekst**  
-   Stuur het wachtwoord persoonlijk (mondeling, apart beveiligd kanaal, briefje of andere messenger).  
-   Als iemand zowel de versleutelde tekst als het wachtwoord onderschept, is de beveiliging weg.
+2. **Het wachtwoord wordt NOOIT online verstuurd door de app**  
+   De app stuurt het wachtwoord nergens naartoe. Alles gebeurt alleen op jouw apparaat.  
+   Jij moet het wachtwoord zelf aan de ontvanger geven.
 
-3. **Gebruik een uniek wachtwoord per gesprekspartner**  
-   Hergebruik niet hetzelfde wachtwoord voor meerdere mensen.
+3. **Geef het wachtwoord bij voorkeur persoonlijk**  
+   Mondeling, via een apart beveiligd kanaal, of op een briefje.  
+   Stuur het wachtwoord **nooit** via hetzelfde kanaal (WhatsApp, e-mail, sms, etc.) als de versleutelde tekst.  
+   Alleen als verzender én ontvanger hetzelfde wachtwoord kennen, kan de tekst worden ontsleuteld.
 
-4. **De app is offline-first**  
+4. **Gebruik voor iedere ontvanger een eigen, uniek wachtwoord**  
+   Nooit hetzelfde wachtwoord voor meerdere mensen.  
+   Als één wachtwoord uitlekt, zijn alle berichten met dat wachtwoord leesbaar.  
+   Maak dus per persoon een apart sterk wachtwoord.
+
+5. **De app is offline-first**  
    Zodra de pagina is geladen, kun je internet uitzetten. Alles werkt dan nog steeds.
 
-5. **Vertrouw de bron**  
+6. **Vertrouw de bron**  
    Open de app bij voorkeur via de officiële GitHub Pages link of host hem zelf. Controleer de code als je twijfelt.
 
 ### Stap-voor-stap: Bericht versleutelen en versturen
@@ -100,17 +107,24 @@ The encryption is real OpenPGP with:
    - Numbers
    - Special characters (e.g. `!@#$%^&*`)
 
-2. **NEVER share the password through the same channel as the encrypted text**  
-   Give the password in person (verbally, separate secure channel, note, or different messenger).  
-   If someone intercepts both the encrypted text and the password, the protection is gone.
+2. **The password is NEVER sent online by the app**  
+   The app does not transmit the password anywhere. Everything happens only on your device.  
+   You must give the password to the recipient yourself.
 
-3. **Use a unique password per conversation partner**  
-   Do not reuse the same password for different people.
+3. **Preferably give the password in person**  
+   Verbally, through a separate secure channel, or on a note.  
+   **Never** send the password through the same channel (WhatsApp, email, SMS, etc.) as the encrypted text.  
+   Only when both sender and recipient know the same password can the text be decrypted.
 
-4. **The app is offline-first**  
+4. **Use a unique password for each recipient**  
+   Never use the same password for multiple people.  
+   If one password leaks, all messages encrypted with that password become readable.  
+   Therefore create a separate strong password for every person.
+
+5. **The app is offline-first**  
    Once the page is loaded, you can turn off the internet. Everything still works.
 
-5. **Trust the source**  
+6. **Trust the source**  
    Preferably open the app via the official GitHub Pages link or host it yourself. Check the code if you have any doubts.
 
 ### Step-by-step: Encrypt and send a message
@@ -155,4 +169,4 @@ It works exactly the same the other way around.
 ## License
 
 This project uses [OpenPGP.js](https://openpgpjs.org) (LGPL-3.0).  
-The rest of the code is free to use and modify.
+The rest of the code is NoneCopy©
