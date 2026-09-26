@@ -84,6 +84,30 @@
       align-items: center;
       gap: 8px;
     }
+    .howto {
+      background: #e3f2fd;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: #0d47a1;
+    }
+    .howto h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: #0d47a1;
+    }
+    .howto ol {
+      padding-left: 20px;
+      margin: 0;
+    }
+    .howto li {
+      margin-bottom: 8px;
+    }
+    .howto strong {
+      color: #002171;
+    }
     .tabs {
       display: flex;
       gap: 6px;
@@ -214,9 +238,20 @@
     🛡️ Alles gebeurt alleen op jouw apparaat. Geen data verlaat je telefoon of computer.
   </div>
 
+  <div class="howto" id="howto">
+    <h3 id="howto-title">Hoe werkt het?</h3>
+    <ol id="howto-list">
+      <li>Kies een <strong>lang en sterk wachtwoord</strong> (minimaal 12–16 tekens) met hoofdletters, cijfers en leestekens. Deel dit wachtwoord <strong>persoonlijk</strong> met de ontvanger (mondeling, apart kanaal of briefje) – nooit via hetzelfde kanaal als de versleutelde tekst.</li>
+      <li>Typ je bericht, vul het wachtwoord in en klik op <strong>Versleutelen</strong>.</li>
+      <li>Kopieer de versleutelde PGP-tekst en stuur die via een willekeurige messenger (WhatsApp, Telegram, Signal, e-mail, sms…).</li>
+      <li>De ontvanger opent deze pagina, plakt de versleutelde tekst, vult hetzelfde wachtwoord in en klikt op <strong>Ontsleutelen</strong>.</li>
+      <li>Andersom werkt precies hetzelfde: de ander versleutelt met hetzelfde wachtwoord en jij ontsleutelt het hier.</li>
+    </ol>
+  </div>
+
   <div class="tabs">
-    <div class="tab active" id="tab-encrypt" onclick="switchTab('encrypt')" data-nl="Versleutelen" data-en="Encrypt">Versleutelen</div>
-    <div class="tab" id="tab-decrypt" onclick="switchTab('decrypt')" data-nl="Ontsleutelen" data-en="Decrypt">Ontsleutelen</div>
+    <div class="tab active" id="tab-encrypt" onclick="switchTab('encrypt')">Versleutelen</div>
+    <div class="tab" id="tab-decrypt" onclick="switchTab('decrypt')">Ontsleutelen</div>
   </div>
 
   <!-- VERSLEUTELEN -->
@@ -224,244 +259,4 @@
     <div class="card">
       <label for="password" id="label-password">Wachtwoord</label>
       <input type="password" id="password" autocomplete="current-password" placeholder="Sterk wachtwoord of lange wachtwoordzin">
-      <p class="password-hint" id="password-hint">Deel dit wachtwoord persoonlijk (nooit via hetzelfde kanaal als de tekst)</p>
-
-      <label for="plaintext" id="label-plaintext" style="margin-top:14px">Bericht om te versleutelen</label>
-      <textarea id="plaintext" placeholder="Typ hier je geheime bericht..."></textarea>
-
-      <div class="buttons">
-        <button class="btn-primary" id="btn-encrypt" onclick="encrypt()">Versleutelen</button>
-        <button class="btn-copy" id="btn-copy" onclick="copyEncrypted()">Kopieer</button>
-      </div>
-      <div id="status-encrypt" class="status"></div>
-    </div>
-
-    <div class="card hidden" id="result-card">
-      <label id="label-encrypted">Versleutelde PGP-tekst</label>
-      <textarea id="encrypted" readonly></textarea>
-    </div>
-  </div>
-
-  <!-- ONTSLEUTELEN -->
-  <div id="panel-decrypt" class="hidden">
-    <div class="card">
-      <label for="password2" id="label-password2">Wachtwoord</label>
-      <input type="password" id="password2" autocomplete="current-password" placeholder="Hetzelfde wachtwoord">
-
-      <label for="ciphertext" id="label-ciphertext" style="margin-top:14px">Plak hier de versleutelde PGP-tekst</label>
-      <textarea id="ciphertext" placeholder="-----BEGIN PGP MESSAGE-----&#10;...&#10;-----END PGP MESSAGE-----"></textarea>
-
-      <div class="buttons">
-        <button class="btn-primary" id="btn-decrypt" onclick="decrypt()">Ontsleutelen</button>
-      </div>
-      <div id="status-decrypt" class="status"></div>
-    </div>
-
-    <div class="card hidden" id="decrypted-card">
-      <label id="label-decrypted">Ontsleuteld bericht</label>
-      <textarea id="decrypted" readonly></textarea>
-    </div>
-  </div>
-
-  <footer id="footer">
-    Werkt op iOS, Samsung, Android, Windows, Mac &amp; Linux.<br>
-    Powered by OpenPGP.js v6.3.1 (veilige versie na CVE-2025-47934)<br>
-    Open source • Geen tracking • Geen server
-  </footer>
-
-  <!-- Lokale, veilige versie van OpenPGP.js v6.3.1 (na CVE-2025-47934) -->
-  <!-- Alles offline – geen externe afhankelijkheden -->
-  <script src="openpgp.min.js"></script>
-
-  <script>
-    // ========== TAALBEHEER ==========
-    let currentLang = 'nl';
-
-    const i18n = {
-      nl: {
-        title: '🔐 Simpele PGP Messenger',
-        subtitle: 'Volledig offline • Wachtwoord-gebaseerd • Echte OpenPGP (AES-256 + Argon2)',
-        security: '🛡️ Alles gebeurt alleen op jouw apparaat. Geen data verlaat je telefoon of computer.',
-        encryptTab: 'Versleutelen',
-        decryptTab: 'Ontsleutelen',
-        password: 'Wachtwoord',
-        passwordHint: 'Deel dit wachtwoord persoonlijk (nooit via hetzelfde kanaal als de tekst)',
-        plaintext: 'Bericht om te versleutelen',
-        encryptBtn: 'Versleutelen',
-        copyBtn: 'Kopieer',
-        encryptedLabel: 'Versleutelde PGP-tekst',
-        password2: 'Wachtwoord',
-        ciphertext: 'Plak hier de versleutelde PGP-tekst',
-        decryptBtn: 'Ontsleutelen',
-        decryptedLabel: 'Ontsleuteld bericht',
-        footer: 'Werkt op iOS, Samsung, Android, Windows, Mac & Linux.<br>Powered by OpenPGP.js v6.3.1 (veilige versie na CVE-2025-47934)<br>Open source • Geen tracking • Geen server',
-        langBtn: 'English',
-        statusEncrypting: 'Bezig met zware versleuteling (Argon2)...',
-        statusSuccessEnc: '✅ Succesvol versleuteld! Kopieer de tekst hieronder.',
-        statusCopied: '✅ Gekopieerd naar klembord!',
-        statusDecrypting: 'Bezig met ontsleutelen...',
-        statusSuccessDec: '✅ Succesvol ontsleuteld!',
-        errorEmpty: 'Vul wachtwoord én tekst in',
-        errorDecrypt: 'Fout: verkeerd wachtwoord of ongeldige PGP-tekst',
-        errorGeneric: 'Fout: '
-      },
-      en: {
-        title: '🔐 Simple PGP Messenger',
-        subtitle: 'Fully offline • Password-based • Real OpenPGP (AES-256 + Argon2)',
-        security: '🛡️ Everything happens only on your device. No data leaves your phone or computer.',
-        encryptTab: 'Encrypt',
-        decryptTab: 'Decrypt',
-        password: 'Password',
-        passwordHint: 'Share this password in person (never via the same channel as the text)',
-        plaintext: 'Message to encrypt',
-        encryptBtn: 'Encrypt',
-        copyBtn: 'Copy',
-        encryptedLabel: 'Encrypted PGP text',
-        password2: 'Password',
-        ciphertext: 'Paste the encrypted PGP text here',
-        decryptBtn: 'Decrypt',
-        decryptedLabel: 'Decrypted message',
-        footer: 'Works on iOS, Samsung, Android, Windows, Mac & Linux.<br>Powered by OpenPGP.js v6.3.1 (safe version after CVE-2025-47934)<br>Open source • No tracking • No server',
-        langBtn: 'Nederlands',
-        statusEncrypting: 'Performing strong encryption (Argon2)...',
-        statusSuccessEnc: '✅ Successfully encrypted! Copy the text below.',
-        statusCopied: '✅ Copied to clipboard!',
-        statusDecrypting: 'Decrypting...',
-        statusSuccessDec: '✅ Successfully decrypted!',
-        errorEmpty: 'Please enter password and text',
-        errorDecrypt: 'Error: wrong password or invalid PGP text',
-        errorGeneric: 'Error: '
-      }
-    };
-
-    function setLang(lang) {
-      currentLang = lang;
-      const t = i18n[lang];
-      document.getElementById('title').textContent = t.title;
-      document.getElementById('subtitle').textContent = t.subtitle;
-      document.getElementById('securityBadge').textContent = t.security;
-      document.getElementById('tab-encrypt').textContent = t.encryptTab;
-      document.getElementById('tab-decrypt').textContent = t.decryptTab;
-      document.getElementById('label-password').textContent = t.password;
-      document.getElementById('password-hint').textContent = t.passwordHint;
-      document.getElementById('label-plaintext').textContent = t.plaintext;
-      document.getElementById('btn-encrypt').textContent = t.encryptBtn;
-      document.getElementById('btn-copy').textContent = t.copyBtn;
-      document.getElementById('label-encrypted').textContent = t.encryptedLabel;
-      document.getElementById('label-password2').textContent = t.password2;
-      document.getElementById('label-ciphertext').textContent = t.ciphertext;
-      document.getElementById('btn-decrypt').textContent = t.decryptBtn;
-      document.getElementById('label-decrypted').textContent = t.decryptedLabel;
-      document.getElementById('footer').innerHTML = t.footer;
-      document.getElementById('langBtn').textContent = t.langBtn;
-      document.documentElement.lang = lang;
-    }
-
-    function toggleLang() {
-      setLang(currentLang === 'nl' ? 'en' : 'nl');
-    }
-
-    // ========== TABS ==========
-    function switchTab(tab) {
-      document.getElementById('tab-encrypt').classList.toggle('active', tab === 'encrypt');
-      document.getElementById('tab-decrypt').classList.toggle('active', tab === 'decrypt');
-      document.getElementById('panel-encrypt').classList.toggle('hidden', tab !== 'encrypt');
-      document.getElementById('panel-decrypt').classList.toggle('hidden', tab !== 'decrypt');
-    }
-
-    // ========== STATUS ==========
-    function showStatus(id, message, isError = false) {
-      const el = document.getElementById(id);
-      el.textContent = message;
-      el.className = 'status ' + (isError ? 'error' : 'ok');
-    }
-
-    // ========== STERKE ENCRYPTIE (AES-256 + Argon2) ==========
-    async function encrypt() {
-      const password = document.getElementById('password').value;
-      const text = document.getElementById('plaintext').value.trim();
-      const t = i18n[currentLang];
-
-      if (!password || !text) {
-        showStatus('status-encrypt', t.errorEmpty, true);
-        return;
-      }
-
-      try {
-        showStatus('status-encrypt', t.statusEncrypting);
-
-        // Sterke configuratie: Argon2 (memory-hard) + AES-256 + AEAD
-        const message = await openpgp.createMessage({ text });
-        const encrypted = await openpgp.encrypt({
-          message,
-          passwords: [password],
-          format: 'armored',
-          config: {
-            preferredSymmetricAlgorithm: openpgp.enums.symmetric.aes256,
-            s2kType: openpgp.enums.s2k.argon2,          // Memory-hard key derivation
-            aeadProtect: true,                          // Authenticated encryption
-            preferredAEADAlgorithm: openpgp.enums.aead.gcm
-          }
-        });
-
-        document.getElementById('encrypted').value = encrypted;
-        document.getElementById('result-card').classList.remove('hidden');
-        document.getElementById('btn-copy').style.display = 'inline-block';
-        showStatus('status-encrypt', t.statusSuccessEnc);
-      } catch (err) {
-        showStatus('status-encrypt', t.errorGeneric + err.message, true);
-      }
-    }
-
-    // ========== DECRYPTIE ==========
-    async function decrypt() {
-      const password = document.getElementById('password2').value;
-      const armored = document.getElementById('ciphertext').value.trim();
-      const t = i18n[currentLang];
-
-      if (!password || !armored) {
-        showStatus('status-decrypt', t.errorEmpty, true);
-        return;
-      }
-
-      try {
-        showStatus('status-decrypt', t.statusDecrypting);
-
-        const message = await openpgp.readMessage({
-          armoredMessage: armored
-        });
-
-        const { data: decrypted } = await openpgp.decrypt({
-          message,
-          passwords: [password],
-          format: 'utf8'
-        });
-
-        document.getElementById('decrypted').value = decrypted;
-        document.getElementById('decrypted-card').classList.remove('hidden');
-        showStatus('status-decrypt', t.statusSuccessDec);
-      } catch (err) {
-        showStatus('status-decrypt', t.errorDecrypt, true);
-      }
-    }
-
-    // ========== KOPIËREN ==========
-    function copyEncrypted() {
-      const text = document.getElementById('encrypted').value;
-      const t = i18n[currentLang];
-      navigator.clipboard.writeText(text).then(() => {
-        showStatus('status-encrypt', t.statusCopied);
-      }).catch(() => {
-        // Fallback voor oudere browsers
-        const ta = document.getElementById('encrypted');
-        ta.select();
-        document.execCommand('copy');
-        showStatus('status-encrypt', t.statusCopied);
-      });
-    }
-
-    // Start in het Nederlands
-    setLang('nl');
-  </script>
-</body>
-</html>
+      <p class="password-hint" id="password-hint">Deel dit
